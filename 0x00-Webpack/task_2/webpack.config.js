@@ -1,37 +1,65 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 module.exports = {
   entry: './js/dashboard_main.js',
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'public'),
-    clean: true,
+    clean: true, // Clean the output directory before emit.
   },
   mode: 'production',
   module: {
     rules: [
-      { 
-        test: /\.css$/i, 
-        use: ["style-loader", "css-loader"] 
+      {
+        test: /\.css$/i,
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
-      { 
-        test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
+      {
+        test: /\.(ico|gif|png|jpg|jpeg)$/i,
         type: 'asset/resource',
-        generator: {
-          filename: 'assets/[name].[ext]',
-        }
+        use: [
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              bypassOnDebug: true, // Skip optimization in development mode
+              disable: true, // Disable the loader (useful for development)
+              mozjpeg: {
+                progressive: true,
+                quality: 75,
+              },
+              optipng: {
+                enabled: true,
+              },
+              pngquant: {
+                quality: [0.65, 0.90],
+                speed: 4,
+              },
+              gifsicle: {
+                interlaced: false,
+              },
+              webp: {
+                quality: 75,
+              },
+            },
+          },
+        ],
       },
-    ]
+    ],
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: './index.html'
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
     }),
   ],
+  optimization: {
+    minimizer: [
+      `...`,
+      new CssMinimizerPlugin(),
+    ],
+  },
   performance: {
-    hints: false,
-    maxAssetSize: 1512000,
-    maxEntrypointSize: 1512000,
-  }
+    maxAssetSize: 512000, // Increase asset size limit to 500 KiB
+  },
 };
