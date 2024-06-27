@@ -1,18 +1,20 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+
 module.exports = {
   entry: './js/dashboard_main.js',
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'public'),
-    clean: true
+    clean: true,
   },
   mode: 'production',
   module: {
     rules: [
-      { 
-        test: /\.css$/i, 
-        use: ["style-loader", "css-loader"] 
+      {
+        test: /\.css$/i,
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
         test: /\.(ico|gif|png|jpg|jpeg)$/i,
@@ -44,15 +46,20 @@ module.exports = {
           },
         ],
       },
-    ]
+    ],
   },
   plugins: [
-    new HtmlWebpackPlugin()
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+    }),
   ],
+  optimization: {
+    minimizer: [
+      `...`,
+      new CssMinimizerPlugin(),
+    ],
+  },
   performance: {
-    hints: false,
-    maxAssetSize: 1512000,
-    maxEntrypointSize: 1512000,
-  }
-
+    maxAssetSize: 512000, // Increase asset size limit to 500 KiB
+  },
 };
