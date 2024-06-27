@@ -1,8 +1,9 @@
 {
   "name": "task_2",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "webpack.config.js",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack"
   },
   "keywords": [],
@@ -19,10 +20,7 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "css-minimizer-webpack-plugin": "^7.0.0",
-    "image-minimizer-webpack-plugin": "^4.0.2",
     "jquery": "^3.7.1",
-    "lodash": "^4.17.21",
-    "mini-css-extract-plugin": "^2.9.0"
+    "lodash": "^4.17.21"
   }
 }
