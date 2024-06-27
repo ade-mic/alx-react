@@ -14,12 +14,35 @@ module.exports = {
         test: /\.css$/i, 
         use: ["style-loader", "css-loader"] 
       },
-      { 
-        test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
+      {
+        test: /\.(ico|gif|png|jpg|jpeg)$/i,
         type: 'asset/resource',
-        generator: {
-          filename: 'assets/[name].[ext]',
-        }
+        use: [
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              bypassOnDebug: true, // Skip optimization in development mode
+              disable: true, // Disable the loader (useful for development)
+              mozjpeg: {
+                progressive: true,
+                quality: 75,
+              },
+              optipng: {
+                enabled: true,
+              },
+              pngquant: {
+                quality: [0.65, 0.90],
+                speed: 4,
+              },
+              gifsicle: {
+                interlaced: false,
+              },
+              webp: {
+                quality: 75,
+              },
+            },
+          },
+        ],
       },
     ]
   },
