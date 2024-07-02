@@ -4,9 +4,9 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   entry: {
-    header: './js/header.js',
-    body: './js/body.js',
-    footer: './js/footer.js',
+    header: './modules/header/header.js',
+    body: './modules/body/body.js',
+    footer: './modules/footer/footer.js',
   },
   output: {
     filename: '[name].bundle.js',
@@ -34,7 +34,7 @@ module.exports = {
         }
       },
       {
-        tesst: /\.(gif|png|jpe?g|svg)$/i,
+        test: /\.(gif|png|jpe?g|svg)$/i,
         use: [
           'file-loader',
           {
