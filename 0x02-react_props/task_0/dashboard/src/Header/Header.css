@@ -1,0 +1,17 @@
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  background-color: #fff;
+  padding: 20px;
+  color: #f00;
+  display: inline-flex;
+  align-items: center;
+  height: 250px
+}
+.App-header img {
+  max-height: 200px;
+}
