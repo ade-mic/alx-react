@@ -1,0 +1,13 @@
+/* src/Login/Login.css */
+/* Login.css */
+.App-login {
+  margin: 2em;
+}
+
+.App-login label {
+  margin-right: 0.5em;
+}
+
+.App-login input {
+  margin-right: 1em;
+}
