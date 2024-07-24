@@ -1,27 +1,35 @@
 const path = require('path');
 
 module.exports = {
-    entry: './src/index.js',
-    output: {
-        filename: 'bundle.js',
-        path: path.resolve(__dirname, 'dist'),
+  entry: './src/index.js',
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+  mode: 'development', // Set the mode to 'development' or 'production'
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/, // Match both .js and .jsx files
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+        },
+      },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
+    ],
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'], // Automatically resolve certain extensions
+  },
+  devServer: {
+    static: {
+      directory: path.join(__dirname, 'dist'),
     },
-    devServer: {
-        contentBase: './dist',
-        hot: true,
-    },
-    module: {
-        rules: [
-            {
-                test: '/\.css$/',
-                use: ['style-loader', 'css-loader'],
-            },
-            {
-                test: /\.(png|jpg|gif)$/,
-                use: ['file-loader'],
-            },
-        ],
-    },
-    devtool: 'inline-source-map',
-    mode: 'development',
-}
+    compress: true,
+    port: 9000,
+  },
+};

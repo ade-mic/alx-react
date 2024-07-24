@@ -1,6 +1,6 @@
 {
   "name": "dashboard",
-  "homepage": "https://ade-mic.github.io/dashboard/",
+  "homepage":  "https://ade-mic.github.io/alx-react/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
