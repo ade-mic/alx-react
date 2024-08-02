@@ -1,0 +1,19 @@
+
+
+.App-body {
+  padding: 20px;
+  border-bottom: solid #f00;
+  border-top: solid #f00;
+  height: 500px;
+}
+
+
+
+.App-body label {
+  padding: 10px;
+}
+
+.App-body button {
+  margin-left: 10px;
+}
+
